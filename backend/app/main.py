@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes import projects, documents
-from app.database import SessionLocal
+from app.database import Base, engine, SessionLocal
 from app.models import User, Project, Document
 
 
@@ -13,6 +13,10 @@ app = FastAPI(
     version="1.0.0"
 )
 
+@app.on_event("startup")
+def create_tables():
+    Base.metadata.create_all(bind=engine)
+
 
 # CONFIGURATION CORS
 app.add_middleware(
@@ -21,7 +25,8 @@ app.add_middleware(
         "http://127.0.0.1:5500",
         "http://localhost:5500",
         "http://127.0.0.1:5173",
-        "http://localhost:5173"
+        "http://localhost:5173",
+        "https://gedflow.onrender.com"
     ],
     allow_credentials=False,
     allow_methods=["*"],
@@ -37,7 +42,7 @@ app.include_router(documents.router)
 @app.get("/")
 def accueil():
     return {
-        "message": "Bienvenue sur SETEC DATA HUB",
+        "message": "Bienvenue sur GEDFLOW DATA HUB",
         "status": "API opérationnelle",
         "version": "1.0.0"
     }
