@@ -1,0 +1,24 @@
+# Variables d'environnement et mots de passe
+.env
+.env.*
+!.env.example
+
+# Environnements virtuels Python
+venv/
+.venv/
+backend/venv/
+
+# Fichiers Python temporaires
+__pycache__/
+*.py[cod]
+
+# Fichiers importés par les utilisateurs
+backend/uploads/
+
+# Configuration locale des éditeurs
+.vscode/
+.idea/
+
+# Fichiers système
+.DS_Store
+Thumbs.db

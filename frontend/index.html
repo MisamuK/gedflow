@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GEDFLOW | Gestion documentaire</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="app-container">
+      <!-- =====================================
+         BARRE LATÉRALE
+    ====================================== -->
+
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-logo">
+            <span class="brand-icon">
+              <i class="brand-symbol">G</i>
+            </span>
+
+            <div class="brand-text">
+              <h2>GED<span>FLOW</span></h2>
+              <p>DOCUMENT MANAGEMENT</p>
+            </div>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-link active" data-section="dashboard">
+            Tableau de Bord
+          </a>
+
+          <a href="#" class="nav-link" data-section="projects"> Projets </a>
+
+          <a href="#" class="nav-link" data-section="documents"> Documents </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <p>GEDFLOW</p>
+          <span>Version Démo 1.0</span>
+        </div>
+      </aside>
+
+      <!-- =====================================
+         CONTENU PRINCIPAL
+    ====================================== -->
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <h1>Bienvenue sur GEDFLOW</h1>
+            <p>Gestion centralisée des projets et documents techniques.</p>
+          </div>
+        </header>
+
+        <!-- =====================================
+             SECTION DASHBOARD
+        ====================================== -->
+
+        <section id="dashboard-section" class="content-section">
+          <div class="section-header">
+            <div>
+              <h2>Dashboard</h2>
+              <p>Vue globale de votre espace de travail.</p>
+            </div>
+          </div>
+
+          <!-- STATISTIQUES -->
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-info">
+                <p>Total documents</p>
+                <h3 id="total-documents">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <p>Total projets</p>
+                <h3 id="total-projects">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <p>Utilisateurs</p>
+                <h3 id="total-users">0</h3>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-info">
+                <p>Stockage utilisé</p>
+                <h3 id="storage-used">0 Mo</h3>
+              </div>
+            </div>
+          </div>
+
+          <!-- GESTION DES PROJETS -->
+
+          <div class="content-card">
+            <div class="section-header">
+              <div>
+                <h2>Gestion des projets</h2>
+                <p>Liste des projets enregistrés.</p>
+              </div>
+
+              <button id="open-project-modal" class="primary-button">
+                + Nouveau projet
+              </button>
+            </div>
+
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Projet</th>
+                    <th>Référence</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="projects-list">
+                  <tr>
+                    <td colspan="4">Chargement des projets...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================
+     SECTION PROJETS
+====================================== -->
+
+        <section
+          id="projects-section"
+          class="content-section"
+          style="display: none"
+        >
+          <div class="section-header">
+            <div>
+              <h2>Gestion des projets</h2>
+              <p>Consultez et gérez l'ensemble de vos projets.</p>
+            </div>
+
+            <button id="open-project-modal-page" class="primary-button">
+              + Nouveau projet
+            </button>
+          </div>
+
+          <div class="content-card">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Projet</th>
+                    <th>Référence</th>
+                    <th>Statut</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="projects-page-list">
+                  <tr>
+                    <td colspan="4">Chargement des projets...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- =====================================
+             SECTION DOCUMENTS
+        ====================================== -->
+
+        <section
+          id="documents-section"
+          class="content-section"
+          style="display: none"
+        >
+          <div class="section-header">
+            <div>
+              <h2>Gestion des documents</h2>
+              <p>Consultez, recherchez et gérez vos documents techniques.</p>
+            </div>
+
+            <button id="open-document-modal" class="primary-button">
+              + Ajouter un document
+            </button>
+          </div>
+
+          <!-- BARRE DE RECHERCHE -->
+
+          <div class="search-container">
+            <input
+              type="text"
+              id="document-search"
+              placeholder="Rechercher un document, un fichier ou un projet..."
+            />
+
+            <div class="filters-container">
+              <select id="filter-document-type">
+                <option value="">Tous les types</option>
+              </select>
+
+              <select id="filter-document-project">
+                <option value="">Tous les projets</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- TABLEAU DES DOCUMENTS -->
+
+          <div class="content-card">
+            <div class="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Document</th>
+                    <th>Type</th>
+                    <th>Projet associé</th>
+                    <th>Date d'importation</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+
+                <tbody id="documents-list">
+                  <tr>
+                    <td colspan="5">Chargement des documents...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- =====================================
+     MODALE : AJOUT / MODIFICATION PROJET
+====================================== -->
+
+    <div id="project-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="project-modal-title">Nouveau projet</h2>
+
+          <button type="button" id="close-project-modal" class="close-modal">
+            &times;
+          </button>
+        </div>
+
+        <form id="project-form">
+          <div class="form-group">
+            <label for="project-name">Nom du projet</label>
+
+            <input
+              type="text"
+              id="project-name"
+              placeholder="Ex : Construction d'un pont"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="project-reference">Référence du projet</label>
+
+            <input
+              type="text"
+              id="project-reference"
+              placeholder="Ex : SET-2026-001"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="project-description">Description</label>
+
+            <textarea
+              id="project-description"
+              rows="4"
+              placeholder="Description du projet..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="project-status">Statut</label>
+
+            <select id="project-status">
+              <option value="En cours">En cours</option>
+              <option value="Terminé">Terminé</option>
+              <option value="En attente">En attente</option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" id="cancel-project" class="secondary-button">
+              Annuler
+            </button>
+
+            <button type="submit" class="primary-button">
+              Enregistrer le projet
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- =====================================
+     MODALE : AJOUT DOCUMENT
+====================================== -->
+
+    <div id="document-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Ajouter un document</h2>
+
+          <button type="button" id="close-document-modal" class="close-modal">
+            &times;
+          </button>
+        </div>
+
+        <form id="document-form">
+          <div class="form-group">
+            <label for="document-title">Titre du document</label>
+
+            <input
+              type="text"
+              id="document-title"
+              placeholder="Ex : Plan technique du bâtiment"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="document-project">Projet associé</label>
+
+            <select id="document-project">
+              <option value="">Aucun projet associé</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="document-file">Fichier à importer</label>
+
+            <input
+              type="file"
+              id="document-file"
+              accept=".pdf,.docx,.xlsx,.xls"
+              required
+            />
+
+            <small
+              >Formats acceptés : PDF, DOCX, XLSX, XLS. Maximum 20 Mo.</small
+            >
+          </div>
+
+          <div class="modal-actions">
+            <button type="button" id="cancel-document" class="secondary-button">
+              Annuler
+            </button>
+
+            <button type="submit" class="primary-button">
+              Importer le document
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- MODALE MODIFICATION DOCUMENT -->
+    <!-- MODALE MODIFICATION DOCUMENT -->
+    <div id="edit-document-modal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Modifier le document</h2>
+          <button type="button" id="close-edit-document-modal">&times;</button>
+        </div>
+
+        <form id="edit-document-form">
+          <div class="form-group">
+            <label for="edit-document-title">Titre du document</label>
+            <input type="text" id="edit-document-title" required />
+          </div>
+
+          <div class="form-group">
+            <label for="edit-document-project">Projet associé</label>
+            <select id="edit-document-project">
+              <option value="">Aucun projet associé</option>
+            </select>
+          </div>
+
+          <div class="modal-actions">
+            <button
+              type="button"
+              class="secondary-button"
+              id="cancel-edit-document"
+            >
+              Annuler
+            </button>
+
+            <button type="submit" class="primary-button">
+              Enregistrer les modifications
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+  </body>
+</html>
